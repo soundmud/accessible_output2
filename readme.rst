@@ -1,5 +1,6 @@
 This is a copy of accessible_output2 0.16 with a few patches:
 
+- Windows: fixed "module win32com.gen_py has no attribute CLSIDToPackageMap"
 - Windows: an application frozen with cx_Freeze works without additional configuration
 - Linux: fixed eSpeak support
 - Linux: added SpeechDispatcher support (experimental, not activated)
