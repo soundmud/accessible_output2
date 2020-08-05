@@ -40,12 +40,15 @@ class Output(object):
 
     def __init__(self):
         self.is_32bit = platform.architecture()[0] == "32bit"
-        if self.lib32 and self.is_32bit:
-            self.lib = load_library(self.lib32, cdll=self.cdll)
-        elif self.lib64:
-            self.lib = load_library(self.lib64, cdll=self.cdll)
-        else:
-            self.lib = None
+        try:
+            if self.lib32 and self.is_32bit:
+                self.lib = load_library(self.lib32, cdll=self.cdll)
+            elif self.lib64:
+                self.lib = load_library(self.lib64, cdll=self.cdll)
+            else:
+                self.lib = None
+        except OSError:
+            raise OutputError
         if self.lib is not None:
             for func in self.argtypes:
                 try:
